@@ -1,0 +1,32 @@
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/* purgecss end ignore */
+
+@tailwind utilities;
+
+.button {
+	@apply font-bold py-2 px-4 bg-blue-500 text-white text-base;
+}
+.button.white {
+	@apply bg-white text-blue-500 border-blue-500 border-2;
+}
+.button.small {
+	@apply py-1 px-2 text-sm;
+}
+
+.label {
+	@apply block text-gray-700 text-sm font-bold mb-2;
+}
+
+.field {
+	@apply shadow appearance-none border w-full py-2 px-3 text-gray-700 leading-tight;
+}
+
+.field:focus:invalid {
+	@apply border-red-600 border-2;
+}
+
+.field:focus {
+	@apply outline-none shadow-outline;
+}

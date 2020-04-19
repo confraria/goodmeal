@@ -1,0 +1,32 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/node/code
+      - /home/node/code/node_modules
+    depends_on:
+      - db
+    command: ['nodemon', '--watch', 'src/server', 'src/server/index.js']
+    environment:
+      DB_URL: 'mongodb://db:27017/goodmeal'
+      PORT: 3000
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 8080:80
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./config/nginx/app.conf:/etc/nginx/conf.d/app.conf
+      - ./build:/var/local/app
+      - ./static:/var/local/app/assets
+    depends_on:
+      - app
+  db:
+    image: mongo:4-bionic
+    volumes:
+      - ./.data/db:/data/db
+    ports:
+      - 27017:27017

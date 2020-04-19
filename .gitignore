@@ -1,0 +1,5 @@
+.DS_Store
+.data
+node_modules
+build
+config/nginx/build

@@ -1,0 +1,22 @@
+version: '3'
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      DB_URL: 'mongodb://db:27017/goodmeal'
+      PORT: 3000
+    restart: always
+  nginx:
+    build: ./config/nginx
+    ports:
+      - 8080:80
+    depends_on:
+      - app
+    restart: always
+  db:
+    image: mongo:4-bionic
+    volumes:
+      - /mnt/volume_lon1_01/mongo:/data/db
+    restart: always
